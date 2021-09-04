@@ -23,4 +23,6 @@ routes.put(
   studentsController.update
 );
 
+routes.delete("/students/:id", studentsController.delete);
+
 export default routes;
