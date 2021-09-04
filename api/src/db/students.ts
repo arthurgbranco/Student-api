@@ -42,9 +42,24 @@ function updateStudent(id: number, student: Student) {
 }
 
 /**
+ * Deletes an existing student
+ * @returns deletes a student
+ */
+function deleteStudent(id: number) {
+  const studentIndex = students.findIndex((s) => s.id === id);
+  const student = {
+    ...students[studentIndex],
+  };
+
+  students.splice(studentIndex, 1);
+
+  return Promise.resolve(student);
+}
+
+/**
  * Returns student list
  * @returns Students
  */
 const getStudents = () => Promise.resolve(Object.freeze([...students]));
 
-export { addStudent, getStudents, updateStudent };
+export { addStudent, getStudents, updateStudent, deleteStudent };

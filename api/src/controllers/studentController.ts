@@ -21,4 +21,11 @@ export class StudentsController {
 
     return res.status(StatusCodes.OK).json(updatedStudent);
   }
+
+  async delete(req: Request, res: Response) {
+    const id = +req.params.id;
+    const deletedStudent = await StudentsDB.deleteStudent(id);
+
+    return res.status(StatusCodes.OK).json(deletedStudent);
+  }
 }
