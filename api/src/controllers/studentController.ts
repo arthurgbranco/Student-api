@@ -14,4 +14,11 @@ export class StudentsController {
 
     return res.status(StatusCodes.CREATED).json(newStudent);
   }
+
+  async update(req: Request, res: Response) {
+    const id = +req.params.id;
+    const updatedStudent = await StudentsDB.updateStudent(id, req.body);
+
+    return res.status(StatusCodes.OK).json(updatedStudent);
+  }
 }
