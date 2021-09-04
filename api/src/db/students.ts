@@ -25,9 +25,26 @@ function addStudent(student: Student) {
 }
 
 /**
+ * Updates an existing student
+ * @returns updated student
+ */
+function updateStudent(id: number, student: Student) {
+  const oldStudent = students.find((s) => s.id === id);
+  const studentIndex = students.findIndex((s) => s.id === id);
+
+  const updatedStudent = {
+    ...oldStudent,
+    ...student,
+  };
+
+  students[studentIndex] = updatedStudent;
+  return Promise.resolve(updatedStudent);
+}
+
+/**
  * Returns student list
  * @returns Students
  */
 const getStudents = () => Promise.resolve(Object.freeze([...students]));
 
-export { addStudent, getStudents };
+export { addStudent, getStudents, updateStudent };

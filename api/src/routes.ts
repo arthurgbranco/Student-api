@@ -1,7 +1,7 @@
 import { celebrate, Joi } from "celebrate";
-import express, { response } from "express";
+import express from "express";
 import { StudentsController } from "./controllers/studentController";
-import { StudentSchema } from "./types/Student";
+import { StudentSchema, UpdateStudentSchema } from "./types/Student";
 
 const routes = express.Router();
 
@@ -10,11 +10,17 @@ const studentsController = new StudentsController();
 routes.get("/ping", (_, res) => res.json("pong"));
 
 routes.get("/students", studentsController.get);
+
 routes.post(
   "/students",
   celebrate({ body: Joi.object().keys(StudentSchema) }),
   studentsController.create
 );
-//? Why not add an update, delete and get one routes/
+
+routes.put(
+  "/students/:id",
+  celebrate({ body: Joi.object().keys(UpdateStudentSchema) }),
+  studentsController.update
+);
 
 export default routes;
