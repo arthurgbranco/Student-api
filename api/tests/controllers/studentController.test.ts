@@ -32,4 +32,34 @@ describe("Test student requests", () => {
       .send(newStudent)
       .then((res) => expect(res.body).toMatchObject({ id: 2, ...newStudent }));
   });
+
+  it("should update a student", async () => {
+    const updatedStudent = {
+      id: 1,
+      name: "John Eu",
+      email: "john.eu@example.com",
+      city: "Ibirit",
+      birth: new Date("11/13/1999").toISOString(),
+    }
+
+    await supertest(app)
+    .put("/students/1")
+    .send(updatedStudent)
+    .then((res) => expect(res.body).toMatchObject(updatedStudent));
+  });
+
+  it("should delete a student", async () => {
+    const deletedStudent = {
+      id: 1,
+      name: "John Eu",
+      email: "john.eu@example.com",
+      city: "Ibirit",
+      birth: new Date("11/13/1999").toISOString(),
+    }
+
+    await supertest(app)
+    .delete("/students/1")
+    .expect(200)
+    .then((res) => expect(res.body).toMatchObject(deletedStudent));
+  });
 });
