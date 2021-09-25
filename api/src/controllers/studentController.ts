@@ -9,6 +9,13 @@ export class StudentsController {
     return res.status(StatusCodes.OK).json(students);
   }
 
+  async getOne(req: Request, res: Response) {
+    const id = parseInt(req.params.id);
+    const student = await StudentsDB.getStudent(id);
+
+    return res.status(StatusCodes.OK).json(student);
+  }
+
   async create(req: Request, res: Response) {
     const newStudent = await StudentsDB.addStudent(req.body);
 

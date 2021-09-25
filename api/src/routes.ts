@@ -11,6 +11,8 @@ routes.get("/ping", (_, res) => res.json("pong"));
 
 routes.get("/students", studentsController.get);
 
+routes.get("/students/:id", studentsController.getOne);
+
 routes.post(
   "/students",
   celebrate({ body: Joi.object().keys(StudentSchema) }),
